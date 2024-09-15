@@ -19,6 +19,7 @@ Open the terminal and run the following command to edit the Netplan file (if the
 
 If you want to assign a dynamic IP (DHCP) to your device, add the following content to the YAML file:
 
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -35,6 +36,8 @@ Replace <SSID> with your Wi-Fi network name and <Your-WiFi-Password> with your p
 **Step 3: Setting up a Static IP Configuration**
 
 If you prefer to use a static IP, modify the YAML file as follows:
+
+```yaml
 
 network:
   version: 2
@@ -66,11 +69,15 @@ After editing the YAML file, save it by pressing Ctrl + O, then exit the editor 
 
 Now apply the configuration by running:
 
+```bash
+
 sudo netplan apply
 
 **Step 5: Verify the Connection**
 
 To verify if your device is connected to Wi-Fi and using the correct IP address, use the following command:
+
+```bash
 
 ip addr show wlan0
 
@@ -85,6 +92,8 @@ This service is responsible for managing network settings when using Netplan.
 
 You can check the status of the systemd-networkd service by running the following command:
 
+```bash
+
 sudo systemctl status systemd-networkd
 
 - If the service is active (running), then systemd-networkd is working as expected, and the issue may lie elsewhere.
@@ -94,6 +103,8 @@ sudo systemctl status systemd-networkd
 
 If you found that the service is not running, you can start it with the following command:
 
+```bash
+
 sudo systemctl start systemd-networkd
 
 This will start the service and should immediately apply your network settings from Netplan.
@@ -101,6 +112,8 @@ This will start the service and should immediately apply your network settings f
 **Step 3: Enable systemd-networkd to start on boot**
 
 To ensure that the systemd-networkd service starts automatically whenever your system boots, run the following command:
+
+```bash
 
 sudo systemctl enable systemd-networkd
 
@@ -110,9 +123,13 @@ This will enable the service to start automatically every time the system is res
 
 After starting the service and enabling it, you can reapply your Netplan configuration with:
 
+```bash
+
 sudo netplan apply
 
 Then, check your network status with:
+
+```bash
 
 ip addr show wlan0
 
