@@ -30,7 +30,7 @@ network:
       access-points:
         "<SSID>":
           password: "<Your-WiFi-Password>"
-
+```
 Replace <SSID> with your Wi-Fi network name and <Your-WiFi-Password> with your password.
 
 **Step 3: Setting up a Static IP Configuration**
@@ -56,7 +56,7 @@ network:
       access-points:
         "<SSID>":
           password: "<Your-WiFi-Password>"
-
+```
 Replace the values:
 - 192.168.x.xx/24 with the static IP you want to assign.
 - 192.168.x.x with the IP address of your router.
@@ -72,7 +72,7 @@ Now apply the configuration by running:
 ```bash
 
 sudo netplan apply
-
+```
 **Step 5: Verify the Connection**
 
 To verify if your device is connected to Wi-Fi and using the correct IP address, use the following command:
@@ -80,7 +80,7 @@ To verify if your device is connected to Wi-Fi and using the correct IP address,
 ```bash
 
 ip addr show wlan0
-
+```
 You should see the IP address assigned to your wlan0 interface.
 
 **Troubleshooting: Starting systemd-networkd Service**
@@ -95,7 +95,7 @@ You can check the status of the systemd-networkd service by running the followin
 ```bash
 
 sudo systemctl status systemd-networkd
-
+```
 - If the service is active (running), then systemd-networkd is working as expected, and the issue may lie elsewhere.
 - If the service is inactive or failed, you will need to start it manually.
 
@@ -106,7 +106,7 @@ If you found that the service is not running, you can start it with the followin
 ```bash
 
 sudo systemctl start systemd-networkd
-
+```
 This will start the service and should immediately apply your network settings from Netplan.
 
 **Step 3: Enable systemd-networkd to start on boot**
@@ -116,7 +116,7 @@ To ensure that the systemd-networkd service starts automatically whenever your s
 ```bash
 
 sudo systemctl enable systemd-networkd
-
+```
 This will enable the service to start automatically every time the system is restarted.
 
 **Final Check**
@@ -126,13 +126,13 @@ After starting the service and enabling it, you can reapply your Netplan configu
 ```bash
 
 sudo netplan apply
-
+```
 Then, check your network status with:
 
 ```bash
 
 ip addr show wlan0
-
+```
 **Conclusion**
 
 If your device wasn't connecting to the network after configuring Netplan, ensuring that systemd-networkd is running might solve the problem.
